@@ -1,22 +1,22 @@
-# hyperswarm
+# dSwarm
 
 A high-level API for finding and connecting to peers who are interested in a "topic."
 
 ```
-npm install hyperswarm
+npm install dswarm
 ```
 
 ## Usage
 
 ```js
-const hyperswarm = require('hyperswarm')
+const dswarm = require('dswarm')
 const crypto = require('crypto')
 
-const swarm = hyperswarm()
+const swarm = dswarm()
 
 // look for peers listed under this topic
 const topic = crypto.createHash('sha256')
-  .update('my-hyperswarm-topic')
+  .update('my-dswarm-topic')
   .digest()
 
 swarm.join(topic, {
@@ -34,7 +34,7 @@ swarm.on('connection', (socket, info) => {
 
 ## API
 
-#### `swarm = hyperswarm([options])`
+#### `swarm = dswarm([options])`
 
 Create a new network instance
 
@@ -119,7 +119,7 @@ or `null` if the topic is unknown
 
 #### `swarm.connect(peer, (err, socket, info) => {})`
 
-Establish a connection to the given peer. You usually won't need to use this function, because hyperswarm connects to found peers automatically.
+Establish a connection to the given peer. You usually won't need to use this function, because dswarm connects to found peers automatically.
 
  - `peer`. The object emitted by the `'peer'` event.
  - `cb`. Function.
@@ -167,7 +167,7 @@ Use this method to deduplicate connections.
 When two swarms both announce and do lookups on the same topic you'll get duplicate connections
 between them (one client connection and one server connection each).
 
-If you exchange some sort of peer id between them you can use this method to make Hyperswarm
+If you exchange some sort of peer id between them you can use this method to make DSwarm
 deduplicate those connection (ie drop one of them deterministically).
 
 If it returns true then this current connection was dropped due to deduplication and is auto removed.
